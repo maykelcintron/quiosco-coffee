@@ -158,11 +158,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://root:YZ6MYrFIQ6Mh0WIsN8PimY9FwRswSp2x@dpg-d03vch1r0fns73clp3b0-a.oregon-postgres.render.com/quioscocoffeedb"
+        "value": null
       }
     }
   },
