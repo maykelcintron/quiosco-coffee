@@ -1,5 +1,5 @@
 import { prisma } from "@/src/lib/prisma"
-import Categories from "./ui/Categories"
+import Categories from "../ui/Categories"
 import Image from "next/image"
 
 const getCategories = async () => await prisma.category.findMany()

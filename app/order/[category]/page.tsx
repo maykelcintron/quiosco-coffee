@@ -1,4 +1,5 @@
-const OrderPage = () => {
+const OrderPage = ({params}: {params: {category: string}}) => {
+    
     return (
         <div>
             OrderPage
