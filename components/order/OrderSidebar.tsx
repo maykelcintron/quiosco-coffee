@@ -8,7 +8,7 @@ const OrderSidebar = async () => {
     const categories = await getCategories()
 
     return (
-        <aside className="w-72 md:h-screen bg-white">
+        <aside className="w-72 md:h-screen bg-white overflow-y-auto">
             <Image 
                 width={250}
                 height={250}
