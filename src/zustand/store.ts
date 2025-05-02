@@ -8,7 +8,8 @@ interface Store{
     increaseQuantity: (id: Product['id']) => void,
     decreaseQuantity: (id: Product['id']) => void,
     deleteOrderItem: (id: Product['id']) => void,
-    totalPriceOrder: () => number
+    totalPriceOrder: () => number,
+    clearOrden: () => void
 }
 
 export const useStore = create<Store>((set, get) => ({
@@ -59,5 +60,8 @@ export const useStore = create<Store>((set, get) => ({
             order: get().order.filter(item => item.id !== id)
         }))
     },
-    totalPriceOrder: () =>  get().order.reduce((total, item) => total + item.subtotal, 0)
+    totalPriceOrder: () =>  get().order.reduce((total, item) => total + item.subtotal, 0),
+    clearOrden: () => set({
+        order: []
+    })
 }))

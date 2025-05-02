@@ -10,21 +10,26 @@ import { toast } from "react-toastify"
 const OrderSummary = () => {
     const order = useStore(state => state.order)
     const totalPriceOrder = useStore(state => state.totalPriceOrder)
-
-    const handleCreateOrder = (formData: FormData) => {
+    const clearOrden = useStore(state => state.clearOrden)
+   
+    const handleCreateOrder = async (formData: FormData) => {
         const data = {
-            name: formData.get('name')
+            name: formData.get('name'),
+            order,
+            total: totalPriceOrder()
         }
 
-        const result = UserSchema.safeParse(data)
+        const response = await createOrderAction(data)
 
-        if(!result.success) {
-            result.error.issues.forEach(issue => {
+        if(response?.error){
+            response.error.forEach(issue => {
                 toast.error(issue.message)
             })
+            return
         }
 
-        // createOrderAction()
+        toast.success('Orden registrada correctamente')
+        clearOrden()
     }
 
     return (
