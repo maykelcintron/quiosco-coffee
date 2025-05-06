@@ -1,8 +1,8 @@
-import ProductsPage from "./products/page";
+
 
 export default function Home() {
 	
 	return (
-		<ProductsPage />
+		<h1>Prueba</h1>
 	);
 }
