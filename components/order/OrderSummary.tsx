@@ -6,6 +6,7 @@ import { formatCurrency } from "@/utils/formatCurrency"
 import { createOrderAction } from "@/actions/create-order-action"
 import { UserSchema } from "@/src/schema"
 import { toast } from "react-toastify"
+import Paypal from "../paypal"
 
 const OrderSummary = () => {
     const order = useStore(state => state.order)
@@ -27,6 +28,16 @@ const OrderSummary = () => {
             })
             return
         }
+
+        // const paymentPayPal = fetch('/api/checkout', {
+        //     method: 'POST',
+        // })
+
+        // const responsePayment = await paymentPayPal
+        // if(!responsePayment.ok){
+        //     toast.error('Error al procesar el pago')
+        //     return
+        // }
 
         toast.success('Orden registrada correctamente')
         clearOrden()
@@ -54,7 +65,7 @@ const OrderSummary = () => {
 
             <form 
                 action={handleCreateOrder}
-                className="w-full mt-10 space-y-5"
+                className="w-full mt-10 space-y-5 mb-5"
             >
                 <input 
                     type="text" 
@@ -69,6 +80,7 @@ const OrderSummary = () => {
                     value="Confirmar Pedido" 
                 />
             </form>
+            <Paypal />
         </aside>
     )
 }
