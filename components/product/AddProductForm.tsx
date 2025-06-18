@@ -1,6 +1,8 @@
 "use client"
 
+import { createProduct } from "@/actions/create-product-action"
 import { ProductSchema } from "@/src/schema"
+import { useRouter } from "next/navigation"
 import { toast } from "react-toastify"
 
 interface AddProductFormProps {
@@ -8,11 +10,14 @@ interface AddProductFormProps {
 }
 
 const AddProductForm = ({children}: AddProductFormProps) => {
+    const router = useRouter()
+
     const handleCreateProduct = async (formData: FormData) => {
         const data = {
             name: formData.get('name'),
             price: formData.get('price'),
-            categoryId: formData.get('categoryId')
+            categoryId: formData.get('categoryId'),
+            image: formData.get('image')
         }
         
         const result = ProductSchema.safeParse(data)
@@ -21,6 +26,14 @@ const AddProductForm = ({children}: AddProductFormProps) => {
             result.error.issues.forEach((issue) => toast.error(issue.message))
             return
         }
+
+        const response = await createProduct(result.data)
+        if(response?.errors){
+            response.errors.forEach((issue) => toast.error(issue.message))
+        }
+
+        toast.success('Producto creado correctamente...')
+        router.push('/admin/products')
     }
 
     return (

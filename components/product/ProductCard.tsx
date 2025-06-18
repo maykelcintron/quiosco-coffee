@@ -2,18 +2,20 @@ import { Product } from "@/app/generated/prisma"
 import { formatCurrency } from "@/utils/formatCurrency"
 import Image from "next/image"
 import AddProductButton from "./AddProductButton"
+import { getImagePathCloudinary } from "@/utils/getImagePathCloudinary"
 
 type ProductCardsProps = {
     product: Product
 }
 
 const ProductCard = ({product}: ProductCardsProps) => {
+    const imagePath = getImagePathCloudinary(product.image)
     return (
         <div className="border border-black/10 bg-white">
             <Image 
                 width={500}
                 height={500}
-                src={`/products/${product.image}.jpg`}
+                src={imagePath}
                 alt="Product Image"
                 quality={100}
             />
