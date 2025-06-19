@@ -56,11 +56,12 @@ const UploadImage = ({ image }: UploadImageProps) => {
                         <div className="space-y-2">
                             <div>
                                 <label>Imagen Actual:</label>
-                                <div className="relative w-64 h-64">
+                                <div className="relative w-64 h-64 mt-5">
                                     <Image 
                                         fill
                                         src={getImagePathCloudinary(image)}
                                         alt="Imagen Producto"
+                                        style={{ objectFit: 'contain' }}
                                     />
                                 </div>
                             </div>

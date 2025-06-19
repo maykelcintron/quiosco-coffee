@@ -1,13 +1,11 @@
 "use client"
-
-import useSWR from "swr"
-import OrderCard from "@/components/order/OrderCard"
-import Heading from "@/components/ui/Heading"
+import LastOrderItem from "@/components/order/LastOrderItem"
+import Logo from "@/components/ui/Logo"
 import { OrderWithProducts } from "@/src/types"
-
+import useSWR from "swr"
 
 const OrdersPage = () => {
-    const url = '/admin/orders/api'
+    const url = '/orders/api'
     const fetcher = () => fetch(url).then(res => res.json()).then(data => data)
     const { data, error, isLoading } = useSWR<OrderWithProducts[]>(url, fetcher, {
         refreshInterval: 60000,
@@ -19,22 +17,20 @@ const OrdersPage = () => {
 
     return (
     <>
-        <Heading>
-            Administrar Ordenes
-        </Heading>
+        <h1 className="text-5xl text-center font-semibold mt-20 mb-4">Ordenes Listas</h1>
+        <Logo />
 
         {data?.length ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mt-5">
+            <div className="grid grid-cols-2 gap-5 max-w-5xl mx-auto mt-10">
                 {data.map((order) => (
-                    <OrderCard 
-                        key={order.id} 
-                        order={order} 
+                    <LastOrderItem
+                        key={order.id}
+                        order={order}
                     />
                 ))}
             </div>
-        ): 
-            <p className="text-center">No hay ordenes pendientes</p>
-        }
+            
+        ) : <p className="text-center">No hay ordenes listas</p>}
     </>
     )
 }

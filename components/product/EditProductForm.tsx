@@ -1,8 +1,9 @@
 "use client"
 
 import { createProduct } from "@/actions/create-product-action"
+import { updateProductAction } from "@/actions/update-product-action"
 import { ProductSchema } from "@/src/schema"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { toast } from "react-toastify"
 
 interface AddProductFormProps {
@@ -11,6 +12,9 @@ interface AddProductFormProps {
 
 const EditProductForm = ({children}: AddProductFormProps) => {
     const router = useRouter()
+    const params = useParams()
+    const id = +params.id!
+    console.log('ID del producto a editar:', id)
 
     const handleCreateProduct = async (formData: FormData) => {
         const data = {
@@ -20,19 +24,23 @@ const EditProductForm = ({children}: AddProductFormProps) => {
             image: formData.get('image')
         }
         
+        // Validar los datos con el esquema de Zod
         const result = ProductSchema.safeParse(data)
         
+        // Si la validación falla, mostrar errores
         if (!result.success) {
             result.error.issues.forEach((issue) => toast.error(issue.message))
             return
         }
-
-        const response = await createProduct(result.data)
+        
+        // Si pasa la validación, actualizar el producto
+        const response = await updateProductAction(result.data, id)
         if(response?.errors){
-            response.errors.forEach((issue) => toast.error(issue.message))
+            response?.errors.forEach((issue) => toast.error(issue.message))
         }
 
-        toast.success('Producto creado correctamente...')
+        // Si la actualización es exitosa, redirigir y mostrar mensaje
+        toast.success('Producto actualizado correctamente...')
         router.push('/admin/products')
     }
 
