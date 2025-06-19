@@ -1,11 +1,16 @@
 "use client"
 
+import { getImagePathCloudinary } from "@/utils/getImagePathCloudinary"
 import { CldUploadWidget } from "next-cloudinary"
 import Image from "next/image"
 import { useState } from "react"
 import { TbPhotoPlus } from 'react-icons/tb'
 
-const UploadImage = () => {
+type UploadImageProps = {
+    image?: string | undefined
+}
+
+const UploadImage = ({ image }: UploadImageProps) => {
     const [imageUrl, setImageUrl] = useState('')
 
     return (
@@ -47,10 +52,25 @@ const UploadImage = () => {
                         </div>
                     </div>
 
+                    {image && !imageUrl && (
+                        <div className="space-y-2">
+                            <div>
+                                <label>Imagen Actual:</label>
+                                <div className="relative w-64 h-64">
+                                    <Image 
+                                        fill
+                                        src={getImagePathCloudinary(image)}
+                                        alt="Imagen Producto"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                     <input 
                         type="hidden" 
                         name="image"
-                        value={imageUrl}
+                        value={imageUrl? imageUrl : image}
                     />
                 </>
             }}
