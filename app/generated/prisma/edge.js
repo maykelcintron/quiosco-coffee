@@ -152,7 +152,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\User\\Desktop\\quiosco-coffee\\app\\generated\\prisma",
+      "value": "C:\\Users\\Maykel Cintron\\Desktop\\quiosco-coffee\\app\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -166,7 +166,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\User\\Desktop\\quiosco-coffee\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\Maykel Cintron\\Desktop\\quiosco-coffee\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -184,7 +184,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://root:YZ6MYrFIQ6Mh0WIsN8PimY9FwRswSp2x@dpg-d03vch1r0fns73clp3b0-a.oregon-postgres.render.com/quioscocoffeedb"
+        "value": "postgresql://root:yAJRYYQ2Uez66bBXm0hdJURsTk3smg4J@dpg-d1fhn7er433s73fitbtg-a.oregon-postgres.render.com/quioscocoffeedb_d3dh"
       }
     }
   },

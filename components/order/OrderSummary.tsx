@@ -7,6 +7,7 @@ import { createOrderAction } from "@/actions/create-order-action"
 import { UserSchema } from "@/src/schema"
 import { toast } from "react-toastify"
 import Paypal from "../paypal"
+import GeminiChat from "../chat/GeminiChat"
 
 const OrderSummary = () => {
     const order = useStore(state => state.order)
@@ -80,7 +81,8 @@ const OrderSummary = () => {
                     value="Confirmar Pedido" 
                 />
             </form>
-            <Paypal />
+            {/* <Paypal /> */}
+            <GeminiChat />
         </aside>
     )
 }
